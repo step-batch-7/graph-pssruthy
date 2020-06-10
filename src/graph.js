@@ -23,7 +23,7 @@ const bfs = function (pairs, source, target) {
 
   while (queue.length !== 0) {
     const from = queue.shift();
-    if (adjTable[from].includes(target)) return true;
+    if (from in adjTable && adjTable[from].includes(target)) return true;
     adjTable[from].forEach((node) => {
       const isAlreadyInProcess = queue.includes(node) || visited.includes(node);
       if (!isAlreadyInProcess) queue.push(node);
