@@ -16,6 +16,21 @@ const getAdjTable = function (pairs) {
   return adjTable;
 };
 
-const bfs = function (pairs, source, target) {};
+const bfs = function (pairs, source, target) {
+  const adjTable = getAdjTable(pairs);
+  const queue = [source];
+  const visited = [];
+
+  while (queue.length !== 0) {
+    const from = queue.shift();
+    if (adjTable[from].includes(target)) return true;
+    adjTable[from].forEach((node) => {
+      const isAlreadyInProcess = queue.includes(node) || visited.includes(node);
+      if (!isAlreadyInProcess) queue.push(node);
+    });
+    visited.push(from);
+  }
+  return false;
+};
 
 module.exports = { bfs };
