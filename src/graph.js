@@ -23,12 +23,15 @@ const bfs = function (pairs, source, target) {
 
   while (queue.length !== 0) {
     const from = queue.shift();
-    if (from in adjTable && adjTable[from].includes(target)) return true;
-    adjTable[from].forEach((node) => {
-      const isAlreadyInProcess = queue.includes(node) || visited.includes(node);
-      if (!isAlreadyInProcess) queue.push(node);
-    });
-    visited.push(from);
+    if (from in adjTable) {
+      if (adjTable[from].includes(target)) return true;
+      adjTable[from].forEach((node) => {
+        const isAlreadyInProcess =
+          queue.includes(node) || visited.includes(node);
+        if (!isAlreadyInProcess) queue.push(node);
+      });
+      visited.push(from);
+    }
   }
   return false;
 };
